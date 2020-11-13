@@ -23,45 +23,37 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="stuff-bio">
-                    <div class="avatar-wrapper"><img src="{% static 'img/team/big-photo1.png' %}" alt="Person"></div>
-                    <div class="bio-text"><h2>Гуськова Екатерина Геннадьевна</h2><span class="profession">Врач-косметолог, к.м.н.</span>
-                        <span class="years-of-service"><strong>Стаж работы:</strong> 10 лет</span>
+                    <div class="avatar-wrapper"><img src="{{ staff.photo.url }}" alt="Person"></div>
+                    <div class="bio-text"><h2>{{ staff.full_name }}</h2><span class="profession">{{ staff.state }}</span>
+                        <span class="years-of-service"><strong>Стаж работы:</strong> {{ staff.experience }}</span>
                         <button class="cta-button">Записаться на прием</button>
-                        <p>Ведущий специалист и тренер по лазерным технологиям и инъекционным методикам, мезотерапевт,
-                            специалист по плазмолифтингу и ботулинотерапии. Работает по продвинутым протоколам.</p>
-                        <p>Применяет комплексный подход к антиэйджингу и лечению кожи, сочетая знания в области
-                            косметологии, эндокринологии и трихологии. Сертифицированный специалист в области
-                            нехирургической подтяжки мягких тканей лица и тела с помощью нитевого лифтинга. Активный
-                            участник ведущих Всероссийских и Международных конференций по Anti-age технологиям.</p>
+                        <p>
+                            {{ staff.about_text|safe }}
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-lg-12 more-info">
-                <div class="stuff-info"><h2>Информация</h2><span>Дерматовенеролог, косметолог. Врачебной косметологией занимается с 2008 г.</span>
+                <div class="stuff-info">
+                    <h2>Информация</h2>
+                    <span>{{ information_text.text }}</span>
                     <p>Работает по направлениям:</p>
                     <ul>
-                        <li>Контурная пластика (препараты Belotero, Yvoire, Juvederm, Teosyal, Restylane)</li>
-                        <li>Ботулинотерапия (Ксеамин, Диспорт, Ботокс)</li>
-                        <li>Мезотерапия и биоревитализация (Meso-Wharton, Meso-Xanthin, Meso-Sculpt, MesoEye, Aguashine,
-                            Hylual, Jalupro)
-                        </li>
-                        <li>Лазерное удаление сосудов</li>
-                        <li>Эпиляция</li>
-                        <li>Пилинги</li>
-                        <li>Коррекция формы и восполнение потери объема губ и периоральной области</li>
+                        {% for info_li in information_li %}
+                            <li>{{ info_li.direction_row}}</li>
+                        {% endfor %}
                     </ul>
                 </div>
-                <div class="stuff-education"><h2>Образование</h2>
-                    <p>2001 — Казанский медицинский университет имени С. В. Курашова</p>
-                    <p>2006 — Казанская государственная медицинская академия, врач дерматовенеролог</p>
-                    <p>2014 — Казанская государственная медицинская академия, врач косметолог</p>
-                    <h3>Курсы повышения квалификации:</h3>
-                    <p>Курсы повышения квалификации в области косметологии, анатомии, эндокринологии.</p>
-                    <h3>Участие в мероприятиях:</h3>
-                    <p>Участница российских и зарубежных научно-практических конференций, симпозиумов и мастер-классов
-                        по актуальным вопросам дерматовенерологии и косметологии.</p></div>
+                <div class="stuff-education">
+                    <h2>Образование</h2>
+                    {% for ed_li in education_li %}
+                        <p>{{ ed_li.item}}</p>
+                    {% endfor %}
+                </div>
+                {{ item }}
             </div>
         </div>
     </div>

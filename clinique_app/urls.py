@@ -13,6 +13,8 @@ urlpatterns = [
     path('staff', views.staff, name='staff'),
     path('promo', views.promo, name='promo'),
     path('qa', views.qa, name='qa'),
-    path('detail_staff', views.detail_staff, name='detail_staff'),
+    path('staff/<int:id>', views.detail_staff, name='detail_staff'),
 
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

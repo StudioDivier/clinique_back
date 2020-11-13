@@ -18,109 +18,32 @@
     <div class="team-page__workers-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 headers-wrapper"><span class="section-subHeader">Наши специалисты </span><span
-                        class="section-header">команда</span></div>
+                <div class="col-lg-12 headers-wrapper">
+                    <span class="section-subHeader">Наши специалисты </span>
+                    <span class="section-header">команда</span>
+                </div>
             </div>
             <div class="row team__wrapper">
-                <div class="col-lg-4">
-                    <div class="single-worker__wrapper"><img src="{% static 'img/team/photo1.png' %}" alt="Avatar">
-                        <div class="single-worker__header"><h5>Лапатина Наталья Геннадьевна</h5>
-                            <p><span>Стаж работы:</span> <span style="font-weight: 300">10 лет</span></p>
-                            <p>Врач-косметолог, к.м.н.</p></div>
+                {% for staff in staff_list %}
+                    <div class="col-lg-4">
+                    <div class="single-worker__wrapper"><img src="{{ staff.photo.url }}" alt="Avatar">
+                        <div class="single-worker__header">
+                            <h5>{{ staff.full_name }}</h5>
+                            <p>
+                                <span>Стаж работы:</span>
+                                <span style="font-weight: 300">{{ staff.experience }}</span>
+                            </p>
+                            <p>{{ staff.state }}</p>
+                        </div>
                         <div class="single-worker__content">
                             <button class="cta-button">Записаться</button>
-                            <button class="custom-outline">Подробнее</button>
+                            <a href="{{ staff.get_absolute_url }}">
+                                <button class="custom-outline">Подробнее</button>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="single-worker__wrapper"><img src="{% static 'img/team/photo2.png' %}" alt="Avatar">
-                        <div class="single-worker__header"><h5>Привалова Елена Борисовна</h5>
-                            <p><span>Стаж работы:</span> <span style="font-weight: 300">11 лет</span></p>
-                            <p>Врач-косметолог</p></div>
-                        <div class="single-worker__content">
-                            <button class="cta-button">Записаться</button>
-                            <button class="custom-outline">Подробнее</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-worker__wrapper"><img src="{% static 'img/team/photo3.png' %}" alt="Avatar">
-                        <div class="single-worker__header"><h5>Филатова Светлана Сергеевна</h5>
-                            <p><span>Стаж работы:</span> <span style="font-weight: 300">8 лет</span></p>
-                            <p>Врач-косметолог, физиотерапевт</p></div>
-                        <div class="single-worker__content">
-                            <button class="cta-button">Записаться</button>
-                            <button class="custom-outline">Подробнее</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-worker__wrapper"><img src="{% static 'img/team/photo4.png' %}" alt="Avatar">
-                        <div class="single-worker__header"><h5>Лапатина Наталья Геннадьевна</h5>
-                            <p><span>Стаж работы:</span> <span style="font-weight: 300">10 лет</span></p>
-                            <p>Врач-косметолог, к.м.н.</p></div>
-                        <div class="single-worker__content">
-                            <button class="cta-button">Записаться</button>
-                            <button class="custom-outline">Подробнее</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-worker__wrapper"><img src="{% static 'img/team/photo5.png' %}" alt="Avatar">
-                        <div class="single-worker__header"><h5>Лапатина Наталья Геннадьевна</h5>
-                            <p><span>Стаж работы:</span> <span style="font-weight: 300">10 лет</span></p>
-                            <p>Врач-косметолог, к.м.н.</p></div>
-                        <div class="single-worker__content">
-                            <button class="cta-button">Записаться</button>
-                            <button class="custom-outline">Подробнее</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-worker__wrapper"><img src="{% static 'img/team/photo6.png' %}" alt="Avatar">
-                        <div class="single-worker__header"><h5>Лапатина Наталья Геннадьевна</h5>
-                            <p><span>Стаж работы:</span> <span style="font-weight: 300">10 лет</span></p>
-                            <p>Врач-косметолог, к.м.н.</p></div>
-                        <div class="single-worker__content">
-                            <button class="cta-button">Записаться</button>
-                            <button class="custom-outline">Подробнее</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-worker__wrapper"><img src="{% static 'img/team/photo1.png' %}" alt="Avatar">
-                        <div class="single-worker__header"><h5>Лапатина Наталья Геннадьевна</h5>
-                            <p><span>Стаж работы:</span> <span style="font-weight: 300">10 лет</span></p>
-                            <p>Врач-косметолог, к.м.н.</p></div>
-                        <div class="single-worker__content">
-                            <button class="cta-button">Записаться</button>
-                            <button class="custom-outline">Подробнее</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-worker__wrapper"><img src="{% static 'img/team/photo2.png' %}" alt="Avatar">
-                        <div class="single-worker__header"><h5>Лапатина Наталья Геннадьевна</h5>
-                            <p><span>Стаж работы:</span> <span style="font-weight: 300">10 лет</span></p>
-                            <p>Врач-косметолог, к.м.н.</p></div>
-                        <div class="single-worker__content">
-                            <button class="cta-button">Записаться</button>
-                            <button class="custom-outline">Подробнее</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-worker__wrapper"><img src="{% static 'img/team/photo3.png' %}" alt="Avatar">
-                        <div class="single-worker__header"><h5>Лапатина Наталья Геннадьевна</h5>
-                            <p><span>Стаж работы:</span> <span style="font-weight: 300">10 лет</span></p>
-                            <p>Врач-косметолог, к.м.н.</p></div>
-                        <div class="single-worker__content">
-                            <button class="cta-button">Записаться</button>
-                            <button class="custom-outline">Подробнее</button>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -130,7 +53,9 @@
                 <div class="col-lg-12 input-headers"><span>ЦЕНЫ НА ПРИЁМ ВРАЧА-ДЕРМАТОЛОГА, КОСМЕТОЛОГА, ЭНДОКРИНОЛОГА, ТРИХОЛОГА</span>
                     <span>Индивидуально расскажем</span> <span>про каждую услугу</span></div>
                 <div class="col-lg-12 inputs-wrapper">
-                    <form action=""><input type="text" placeholder="ФИО*"> <input type="text" placeholder="Телефон*">
+                    <form action="">
+                        <input type="text" placeholder="ФИО*">
+                        <input type="text" placeholder="Телефон*">
                         <input type="text" placeholder="Почта">
                         <button class="cta-button">Записаться</button>
                     </form>
