@@ -22,62 +22,22 @@
                     <h2>Beauty Gene</h2></div>
             </div>
             <div class="row services__wrapper">
+                {% for service in service_list %}
                 <div class="col-lg-4">
-                    <div class="single-service__wrapper"><img src="{% static 'img/laser-stuff.png' %}" alt="Depilation">
-                        <div class="single-service__header"><h5>Лазерная эпиляция</h5></div>
-                        <div class="single-service__content"><span><a href="#">Лицо</a></span> <span><a
-                                href="#">Тело</a></span></div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-service__wrapper"><img src="{% static 'img/peeling.png' %}" alt="Depilation">
-                        <div class="single-service__header"><h5>Инъекции и пилинги</h5></div>
-                        <div class="single-service__content"><span><a href="#">Ботокс</a></span> <span><a href="#">Контурная пластика</a></span>
-                            <span><a href="#">PRP терапия</a></span> <span><a href="#">Биоревитализация</a></span>
-                            <span><a href="#">Липолитики</a></span> <span><a href="#">Profhilo</a></span> <span><a
-                                    href="#">Мезотерапия</a></span> <span><a href="#">Пилинги</a></span></div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-service__wrapper"><img src="{% static 'img/laser-cosmetology.png' %}" alt="Depilation">
-                        <div class="single-service__header"><h5>Лазерная косметология</h5></div>
-                        <div class="single-service__content"><span><a href="#">Лазерная шлифовка</a></span> <span><a
-                                href="#">Удаление новообразований</a></span> <span><a href="#">Удаление шрамов и растяжек</a></span>
-                            <span><a href="#">Лазерное интимное омоложение</a></span></div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-service__wrapper"><img src="{% static 'img/body-correction.png' %}" alt="Depilation">
-                        <div class="single-service__header"><h5>Аппаратная коррекция тела</h5></div>
-                        <div class="single-service__content"><span><a
-                                href="#">Ваакумно ролликовый массаж T-Shape</a></span> <span><a href="#">Роликовый массаж R-Sleek</a></span>
-                            <span><a href="#">Электростимуляция мыщц TeslaFormer</a></span></div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-service__wrapper"><img src="{% static 'img/face-care.png' %}" alt="Depilation">
-                        <div class="single-service__header"><h5>Уход за лицом</h5></div>
-                        <div class="single-service__content"><span><a href="#">Микротоковый лифтинг лица</a></span>
-                            <span><a href="#">Аппаратный Anti-aging уход</a></span> <span><a href="#">Аппаратный уход для восстановления кожи</a></span>
-                            <span><a href="#">Anti-aging и восстанавливающие процедуры</a></span> <span><a href="#">Чистка лица</a></span>
-                            <span><a href="#">Гидродермабразия (Hydrafacial)</a></span></div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-service__wrapper"><img src="{% static 'img/trihology.png' %}" alt="Depilation">
-                        <div class="single-service__header"><h5>Трихология</h5></div>
-                        <div class="single-service__content"><span><a href="#">PRP терапия</a></span> <span><a href="#">Мезотерапия</a></span>
+                    <div class="single-service__wrapper"><img src="{{ service.img.url }}" alt="Depilation">
+                        <div class="single-service__header">
+                            <h5>{{ service.name }}</h5>
+                        </div>
+                        <div class="single-service__content">
+                            {% for service_detail in service_detail_list %}
+                                <span>
+                                    <a href="{{ service_detail.get_absolute_url }}">{{ service_detail.name }}</a>
+                                </span>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="single-service__wrapper"><img src="{% static 'img/massage.png' %}" alt="Depilation">
-                        <div class="single-service__header"><h5>Массаж</h5></div>
-                        <div class="single-service__content"><span><a href="#">Классический</a></span> <span><a
-                                href="#">Спортивный</a></span> <span><a
-                                href="#">Восстанавливающий/расслабляющий</a></span></div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

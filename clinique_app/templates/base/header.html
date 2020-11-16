@@ -1,22 +1,20 @@
 {% load static %}
-<nav class="navbar navbar-expand-xl navbar-light bg-white justify-content-center">
-    <a class="navbar-brand" href="/">
-        <img src="{% static 'img/logo.png' %}" alt="Company logo">
-    </a>
+<nav class="navbar navbar-expand-xl navbar-light bg-white justify-content-center"><a class="navbar-brand" href="/"><img
+        src="{% static 'img/logo.png' %}" alt="Company logo"> </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"><span
+            class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo02">
         <ul class="navbar-nav mt-2 mt-lg-0">
             <li class="nav-item">
                 <a class="nav-link" href="/about">О клинике</a>
-                <!-- <span class="sr-only">(current)</span> --></li>
+                <!-- <span class="sr-only">(current)</span> -->
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/services">Услуги</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Прайс-лист</a>
+                <a class="nav-link" href="/prices">Прайс-лист</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/promo">Акции</a>
@@ -25,13 +23,13 @@
                 <a class="nav-link" href="#">Онлайн</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/staff">Команда</a>
+                <a class="nav-link" href="/stuff">Команда</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/qa">Вопросы</a>
+                <a class="nav-link" href="/qa-page">Вопросы</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Контакты</a>
+                <a class="nav-link" href="/contacts">Контакты</a>
             </li>
             <li class="call-us-block">
                 <img src="{% static 'img/whatsapp-green.png' %}" alt="Whatsapp">

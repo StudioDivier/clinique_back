@@ -8,7 +8,9 @@
             <div class="col-lg-12 first-screen__content"><h1>Клиника <span class="colored-span">Beauty Gene</span> -
                 бережное отношение к вашей красоте</h1><span class="small-text">Позвоните нам и наш косметолог вас проконсультирует</span>
                 <div class="btn-wrapper">
-                    <button class="cta-button">Записаться на консультацию</button>
+                    <button class="cta-button" data-toggle="modal" data-target="#exampleModalCenter">Записаться на
+                        консультацию
+                    </button>
                 </div>
             </div>
         </div>
@@ -22,11 +24,14 @@
                 <span>Комфортный стационар</span></div>
             <div class="col-xs-12 col-md-2 perks-wrapper"><img src="{% static 'img/circle2.png' %}" alt="">
                 <span>Эксперты медицины</span></div>
-            <div class="col-xs-12 col-md-2 perks-wrapper"><img src="{% static 'img/circle3.png' %}" alt=""> <span>Сертификаты соответствия</span>
+            <div class="col-xs-12 col-md-2 perks-wrapper"><img src="{% static 'img/circle3.png' %}" alt="">
+                <span>Сертификаты соответствия</span>
             </div>
-            <div class="col-xs-12 col-md-2 perks-wrapper"><img src="{% static 'img/circle4.png' %}" alt=""> <span>Инновационные технологии</span>
+            <div class="col-xs-12 col-md-2 perks-wrapper"><img src="{% static 'img/circle4.png' %}" alt="">
+                <span>Инновационные технологии</span>
             </div>
-            <div class="col-xs-12 col-md-2 perks-wrapper"><img src="{% static 'img/circle5.png' %}" alt=""> <span>Множество рекомендаций</span>
+            <div class="col-xs-12 col-md-2 perks-wrapper"><img src="{% static 'img/circle5.png' %}" alt="">
+                <span>Множество рекомендаций</span>
             </div>
             <div class="col-xs-12 col-md-2 perks-wrapper"><img src="{% static 'img/circle6.png' %}" alt="">
                 <span>Довольные клиенты</span></div>
@@ -48,7 +53,8 @@
                     <div class="inner-wrapper">
                         <div class="inner-block"><img src="{% static 'img/exclMark.png' %}" alt="Illustration"> <span>соблюдение баланса между рациональной стоимостью и качеством</span>
                         </div>
-                        <div class="inner-block"><img src="{% static 'img/greenThing2.png' %}" alt="Illustration"> <span>процедуры проводятся во врачебных кабинетах</span>
+                        <div class="inner-block"><img src="{% static 'img/greenThing2.png' %}" alt="Illustration">
+                            <span>процедуры проводятся во врачебных кабинетах</span>
                         </div>
                     </div>
                 </div>
@@ -78,7 +84,7 @@
     </div>
 </div>
 
-<div class="prices-section">
+<div class="prices-section" id="price_form">
     <div class="firstPic">
         <div class="secondPic">
             <div class="thirdPic">
@@ -144,11 +150,16 @@
             <div class="col-12 input-headers"><span>ЦЕНЫ НА ПРИЁМ ВРАЧА-ДЕРМАТОЛОГА, КОСМЕТОЛОГА, ЭНДОКРИНОЛОГА, ТРИХОЛОГА</span>
                 <span>Индивидуально расскажем</span> <span>про каждую услугу</span></div>
             <div class="col-12 inputs-wrapper">
-                <form action="">
-                    <input type="text" placeholder="ФИО*">
-                    <input type="text" placeholder="Телефон*">
-                    <input type="text" placeholder="Почта">
-                    <button class="cta-button">Записаться</button>
+                <form method="post" action="">
+<!--                    <input type="text" placeholder="ФИО*">-->
+<!--                    <input type="text" placeholder="Телефон*">-->
+<!--                    <input type="text" placeholder="Почта">-->
+                    {% csrf_token %}
+                    {{ form_price.name }}
+                    {{ form_price.phone }}
+                    {{ form_price.email }}
+
+                    <button class="cta-button" type="submit" value="Submit" name="price_form">Записаться</button>
                 </form>
                 <p>Я соглашаюсь на обработку персональных данных и с <a href="" style="color: #4f9c50;">политикой
                     конфиденциальности</a></p></div>
@@ -236,7 +247,8 @@
                 </div>
             </div>
             <div class="col-12">
-                <button class="cta-button"><img src="{% static 'img/svg-insta.png' %}" alt="Instagram icon">&nbsp; Подписаться на нас в
+                <button class="cta-button"><img src="{% static 'img/svg-insta.png' %}" alt="Instagram icon">&nbsp;
+                    Подписаться на нас в
                     Instagram
                 </button>
             </div>
@@ -405,6 +417,36 @@
                                 себя можно в любом возрасте. Перед каждой процедурой вас проконсультирует врач и
                                 подберет наиболее подходящие для вас и вашего возраста процедуры.
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 inputs-wrapper"><h2>Записаться на прием</h2>
+                            <form method="post" action="#">
+                                {% csrf_token %}
+                                {{ form_up.name }}
+                                {{ form_up.phone }}
+                                {{ form_up.email }}
+                                {{ form_up.date }}
+                                {{ form_up.service }}
+                                <button class="cta-button" type="submit" value="Submit">Записаться</button>
+                            </form>
+                            <p>Я соглашаюсь на обработку персональных данных и с <a href="" style="color: #4f9c50;">политикой
+                                конфиденциальности</a></p>
                         </div>
                     </div>
                 </div>

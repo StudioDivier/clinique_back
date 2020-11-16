@@ -24,7 +24,8 @@
             <div class="col-lg-12">
                 <div class="stuff-bio">
                     <div class="avatar-wrapper"><img src="{{ staff.photo.url }}" alt="Person"></div>
-                    <div class="bio-text"><h2>{{ staff.full_name }}</h2><span class="profession">{{ staff.state }}</span>
+                    <div class="bio-text"><h2>{{ staff.full_name }}</h2><span
+                            class="profession">{{ staff.state }}</span>
                         <span class="years-of-service"><strong>Стаж работы:</strong> {{ staff.experience }}</span>
                         <button class="cta-button">Записаться на прием</button>
                         <p>
@@ -43,14 +44,14 @@
                     <p>Работает по направлениям:</p>
                     <ul>
                         {% for info_li in information_li %}
-                            <li>{{ info_li.direction_row}}</li>
+                        <li>{{ info_li.direction_row}}</li>
                         {% endfor %}
                     </ul>
                 </div>
                 <div class="stuff-education">
                     <h2>Образование</h2>
                     {% for ed_li in education_li %}
-                        <p>{{ ed_li.item}}</p>
+                    <p>{{ ed_li.item}}</p>
                     {% endfor %}
                 </div>
                 {{ item }}
@@ -65,33 +66,26 @@
                 </div>
             </div>
             <div class="row">
+                {% for direction in direction_list %}
                 <div class="col-lg-6">
-                    <div class="direction-wrapper"><h5>Инъекционная косметология</h5>
-                        <p>Контурная пластика</p><span>Контурная пластика губ</span> <span>Увеличение губ гиалуроновой кислотой</span>
-                        <span>Филлеры для губ</span> <span>Векторный лифтинг препаратом Radiesse</span>
-                        <p>Ботулинотерапия</p><span>Инъекции ботокса для бровей</span>
-                        <span>Инъекции ботокса для губ</span> <span>Инъекции ботокса для лица</span> <span>Инъекции ботокса под глаза</span>
-                        <span>Ботулинотерапия носа</span> <span>Инъекции ботокса в лоб</span>
-                        <span>Ботулинотерапия шеи</span> <span>Ботулинотерапия кисетных морщин вокруг рта</span> <span>Ботулинотерапия мимических морщин улыбки</span>
-                        <span>Ботулинотерапия мимических морщин в области лба и межбровья</span> <span>Коррекция морщин вокруг глаз</span>
+                    <div class="direction-wrapper"><h5>{{ direction.direction }}</h5>
+                        {% for sub_dir in subdirection_all %}
+
+                            {% if sub_dir.name_direction == direction.direction %}
+                                <p>{{ sub_dir.name_subdirection }}</p>
+
+                                {% for item_sub in items_sub %}
+                                    {% if item_sub.subdirection_id_id == sub_dir.id %}
+                                        <span>{{ item_sub.item }}</span>
+                                    {% endif %}
+                                {% endfor %}
+
+                            {% endif %}
+
+                        {% endfor %}
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="direction-wrapper"><h5>Аппаратная косметология</h5>
-                        <p>Удаление сосудов на аппарате Sharplight Omnimax</p><span>Лечение купероза (розацеа)</span>
-                        <span>Удаление купероза на лице лазером</span> <span>Удаление купероза фотовспышками</span>
-                        <span>Эпиляция</span>
-                        <p>SMAS-лифтинг лица на аппарате Ultraformer</p><span>Аппаратная коррекция «гусиных лапок» с применением Ultraformer</span>
-                        <span>Аппаратная коррекция нижней трети лица с применением Ultraformer</span> <span>Безоперационная подтяжка лица на аппарате Ультраформер</span>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="direction-wrapper"><h5>Уходовые процедуры</h5>
-                        <p>Пилинги</p><span>Миндальный пилинг</span> <span>Молочный пилинг для лица</span> <span>Ретиноевый пилинг — глубинное обновление кожи</span>
-                        <span>Салициловый пилинг</span> <span>Пилинг Biorepeelcl3</span> <span>Пилинг PRX-T33</span>
-                        <span>Пилинг Джесснера — голливудский стандарт обновления кожи</span>
-                        <span>Пилинг тела в салоне</span></div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>

@@ -121,3 +121,46 @@ class Personals(models.Model):
     def get_absolute_url(self):
         return reverse('index:detail_staff', args=[self.id])
 
+
+class Appointment(models.Model):
+    name = models.CharField(name='name', max_length=128)
+    phone = models.BigIntegerField(name='phone')
+    email = models.EmailField(name='email')
+    date = models.CharField(name='date', max_length=128)
+    service = models.CharField(name='service', max_length=128)
+
+
+class GetPrice(models.Model):
+    name = models.CharField(name='name', max_length=128)
+    phone = models.BigIntegerField(name='phone')
+    email = models.EmailField(name='email')
+
+
+class ServicesList(models.Model):
+    service = models.CharField(name='service', max_length=128)
+    img = models.ImageField(name='img')
+
+class ServiceDetail(models.Model):
+    service = models.ForeignKey(ServicesList, on_delete=models.CASCADE)
+    name = models.CharField(name='name', max_length=128)
+
+    description = models.CharField(name='description', max_length=1024)
+    time_operation = models.CharField(name='time_operation', max_length=128)
+    sex = models.CharField(name='sex', max_length=64)
+    reabilitation = models.CharField(name='reabilitation', max_length=128)
+    time_result = models.CharField(name='time_result', max_length=128)
+    amnesia = models.CharField(name='amnesia', max_length=128)
+
+
+    def get_absolute_url(self):
+        return reverse('index:detail_services', args=[self.id])
+
+
+class SessionPrices(models.Model):
+    part_name = models.CharField(name='part_name', max_length=128)
+    session_price1 = models.DecimalField(name='session_price1', max_digits=9, decimal_places=2)
+    session_price2 = models.DecimalField(name='session_price2', max_digits=9, decimal_places=2)
+    service = models.ForeignKey(ServiceDetail, on_delete=models.CASCADE)
+
+
+

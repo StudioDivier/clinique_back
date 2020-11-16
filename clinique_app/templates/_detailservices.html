@@ -1,0 +1,139 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="detail-services-page">
+    <div class="detail-services-page__content-wrapper">
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb bg-transparent p-0">
+                            <li class="breadcrumb-item"><a href="/">Главная</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Услуги</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 headers-wrapper"><span class="section-subHeader">Тело</span></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="content-wrapper">
+                        <div class="inner-wrapper"><p>Существуют разные типы лазеров для удаления волос, которые
+                            целесообразно использовать в каждой конкретной клинической ситуации. Так, например, лазерная
+                            эпиляция александритовым лазером обычно лучше удаляет волосы на светлой коже, а диодным,
+                            наоборот, на темной.</p>
+                            <div class="features-wrapper">
+                                <div class="inner-wrapper">
+                                    <img src="{% static 'img/icons/clock1.png' %}" alt="Time">
+                                    <div class="text-wrapper">
+                                        <span class="classification">{{ service.time_operation}}</span> <span>время процедуры</span>
+                                    </div>
+                                </div>
+                                <div class="inner-wrapper">
+                                    <img src="{% static 'img/icons/med.png' %}" alt="Gender">
+                                    <div class="text-wrapper">
+                                        <span class="classification">{{ service.reabilitation }}</span>
+                                        <span>реабилитации</span>
+                                    </div>
+                                </div>
+                                <div class="inner-wrapper">
+                                    <img src="{% static 'img/icons/needle.png' %}" alt="Gender">
+                                    <div class="text-wrapper">
+                                        <span class="classification">{{ service.amnesia }}</span>
+                                        <span>анестезии</span>
+                                    </div>
+                                </div>
+                                <div class="inner-wrapper">
+                                    <img src="{% static 'img/icons/gender.png' %}" alt="Gender">
+                                    <div class="text-wrapper">
+                                        <span class="classification">{{ service.sex }}</span> <span>для кого процедура</span>
+                                    </div>
+                                </div>
+                                <div class="inner-wrapper">
+                                    <img src="{% static 'img/icons/check.png' %}" alt="Gender">
+                                    <div class="text-wrapper">
+                                        <span class="classification">{{ service.time_result }}</span> <span>результат</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="cta-button">Записаться на консультацию</button>
+                        </div>
+                        <div class="inner-wrapper-two">
+                            <img class="main-image" src="{% static 'img/illustration-detail-services.png' %}" alt="Illustration">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="callback-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 input-headers">
+                    <span>ЦЕНЫ НА ПРИЁМ ВРАЧА-ДЕРМАТОЛОГА, КОСМЕТОЛОГА, ЭНДОКРИНОЛОГА, ТРИХОЛОГА</span>
+                    <span>Индивидуально расскажем</span> <span>про каждую услугу</span>
+                </div>
+                <div class="col-lg-12 inputs-wrapper">
+                    <form action="" style="justify-content: center;">
+                        <button class="cta-button">Связаться с нами</button>
+                    </form>
+                    <p style="width: 31%; margin: 0 auto">Я соглашаюсь на обработку персональных данных и с <a href=""
+                                                                                                               style="color: #4f9c50;">политикой
+                        конфиденциальности</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="prices-section">
+        <div class="firstPic">
+            <div class="secondPic">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 headers-wrapper" style="position: relative; top: -190px;"><span
+                                class="section-subHeader">Стоимость услуг </span><span
+                                class="section-header">Прайс-лист</span>
+                        </div>
+                        <div class="col-12 section-wrapper">
+                            <div class="another-wrapper">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-8"></div>
+                                        <div class="col-lg-2 white-col">
+                                            <span style="font-weight: bold">1 сессия</span>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <span style="font-weight: bold">2 сессия</span>
+                                        </div>
+                                    </div>
+                                    {% for session in session_prices %}
+                                        <div class="row custom-row">
+                                            <div class="col-lg-8">{{ session.part_name }}</div>
+                                            <div class="col-lg-2 white-col">
+                                                <span class="green-colored-div"><span class="mobile-only">1 сессия</span>{{ session.session_price1 }} £</span>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <span class="blue-colored-div"><span class="mobile-only">2 сессии</span>{{ session.session_price2 }} £</span>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    <div class="row custom-row">
+                                        <div class="col-lg-8"></div>
+                                        <div class="col-lg-2 white-col"></div>
+                                        <div class="col-lg-2"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

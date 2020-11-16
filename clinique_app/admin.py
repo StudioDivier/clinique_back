@@ -75,3 +75,18 @@ class EventsAdmin(admin.ModelAdmin):
 class PersonalAdmin(admin.ModelAdmin):
     list_display = ('full_name', 'state', 'experience', 'photo', 'about_text',
                     'info', 'ed', 'cur', 'events', 'add_direction', 'add_subdirection')
+
+
+class SessionInline(admin.StackedInline):
+    model = models.SessionPrices
+
+
+@admin.register(models.ServiceDetail)
+class ServiceDetailAdmin(admin.ModelAdmin):
+    list_display = ('name','description','time_operation','sex','reabilitation','time_result','amnesia',)
+    inlines = [ SessionInline ]
+
+
+@admin.register(models.ServicesList)
+class ServiceListAdmin(admin.ModelAdmin):
+    list_display = ('service', 'img',)
