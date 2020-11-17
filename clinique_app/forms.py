@@ -1,5 +1,6 @@
 from django import forms
 
+
 class UpForm(forms.Form):
     """
     Класс формы на главной странице сайта

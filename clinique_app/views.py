@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from . import models
 from . import forms
 from .services import database_form
@@ -15,65 +15,238 @@ def index(request):
         if 'exampleModalCenter' in request.POST:
             if form_up.is_valid():
                 data = form_up.cleaned_data
-                database_form.upformForward(name=data['name'], phone=data['phone'], email=data['email'],
-                                            date=data['date'], service=data['service'])
-
-                return HttpResponseRedirect('/')
+                smth = models.Appointment(name=data['name'], phone=data['phone'], email=data['email'],
+                                          date=data['date'], service=data['service'])
+                smth.save()
+            return HttpResponseRedirect('/')
 
         if 'price_form' in request.POST:
             if form_price.is_valid():
                 data = form_price.cleaned_data
-                smth = database_form.priceformForward(name=data['name'], phone=data['phone'], email=data['email'])
+                smth = models.GetPrice(name=data['name'], phone=data['phone'],
+                                       email=data['email'])
+                smth.save()
+            return HttpResponseRedirect('/')
 
-                return HttpResponseRedirect('/')
+    else:
+        form_up = forms.UpForm(request.POST)
+        form_price = forms.PricesForm(request.POST)
+        promo_list = models.Promo.objects.all().order_by('id')
+        staff_list = models.Personals.objects.all().order_by('id')
+        service_detail_list = models.ServiceDetail.objects.all().order_by('id')
+
+        return render(request, '_index.html', {'form_up': form_up, 'form_price': form_price,
+                                               'promo_list': promo_list, 'staff_list': staff_list,
+                                               'service_detail_list': service_detail_list})
+
+
+def about(request):
+    if request.method == 'POST':
+
+        form_price = forms.PricesForm(request.POST)
+        form_up = forms.UpForm(request.POST)
+
+        if 'exampleModalCenter' in request.POST:
+            if form_up.is_valid():
+                data = form_up.cleaned_data
+                smth = models.Appointment(name=data['name'], phone=data['phone'], email=data['email'],
+                                          date=data['date'], service=data['service'])
+                smth.save()
+            return HttpResponseRedirect('/about')
+
+        if 'price_form' in request.POST:
+            if form_price.is_valid():
+                data = form_price.cleaned_data
+                smth = models.GetPrice(name=data['name'], phone=data['phone'],
+                                       email=data['email'])
+                smth.save()
+            return HttpResponseRedirect('/about')
+
+    else:
+        form_price = forms.PricesForm(request.POST)
+        form_up = forms.UpForm(request.POST)
+
+        return render(request, '_about.html', {'form_price': form_price, 'form_up': form_up})
+
+
+def services(request):
+    if request.method == 'POST':
+
+        form_price = forms.PricesForm(request.POST)
+        form_up = forms.UpForm(request.POST)
+
+        if 'exampleModalCenter' in request.POST:
+            if form_up.is_valid():
+                data = form_up.cleaned_data
+                smth = models.Appointment(name=data['name'], phone=data['phone'], email=data['email'],
+                                          date=data['date'], service=data['service'])
+                smth.save()
+            return HttpResponseRedirect('/services')
+
+        if 'price_form' in request.POST:
+            if form_price.is_valid():
+                data = form_price.cleaned_data
+                smth = models.GetPrice(name=data['name'], phone=data['phone'],
+                                       email=data['email'])
+                smth.save()
+            return HttpResponseRedirect('/services')
+
+    else:
+        form_price = forms.PricesForm(request.POST)
+        form_up = forms.UpForm(request.POST)
+        service_list = models.ServicesList.objects.all()
+        service_detail_list = models.ServiceDetail.objects.all()
+
+        return render(request, '_services.html', {'service_list': service_list,
+                                                  'service_detail_list': service_detail_list,
+                                                  'form_price': form_price, 'form_up': form_up})
+
+
+def detail_services(request, id):
+    if request.method == 'POST':
+        form_up = forms.UpForm(request.POST)
+        form_price = forms.PricesForm(request.POST)
+
+        if 'exampleModalCenter' in request.POST:
+            if form_up.is_valid():
+                data = form_up.cleaned_data
+                smth = models.Appointment(name=data['name'], phone=data['phone'], email=data['email'],
+                                          date=data['date'], service=data['service'])
+                smth.save()
+            return HttpResponseRedirect('/services')
+
+        if 'price_form' in request.POST:
+            if form_price.is_valid():
+                data = form_price.cleaned_data
+                smth = models.GetPrice(name=data['name'], phone=data['phone'],
+                                       email=data['email'])
+                smth.save()
+            return HttpResponseRedirect('/services')
 
     else:
         form_up = forms.UpForm(request.POST)
         form_price = forms.PricesForm(request.POST)
 
-        return render(request, '_index.html', {'form_up': form_up, 'form_price': form_price})
+        service = get_object_or_404(models.ServiceDetail, id=id)
+        service_obj = models.ServicesList.objects.get(id=service.service_id)
+        # service_detail_list = models.ServiceDetail.objects.all()
+        session_prices = models.SessionPrices.objects.filter(service_id=service.id)
 
 
-def about(request):
-    return render(request, '_about.html')
-
-
-def services(request):
-    service_list = models.ServicesList.objects.all()
-    service_detail_list = models.ServiceDetail.objects.all()
-
-    return render(request, '_services.html', {'service_list': service_list,
-                                                    'service_detail_list': service_detail_list,})
-
-
-def detail_services(request, id):
-
-    service = get_object_or_404(models.ServiceDetail, id=id)
-
-    service_obj = models.ServicesList.objects.get(id=service.service_id)
-    # service_detail_list = models.ServiceDetail.objects.all()
-    session_prices = models.SessionPrices.objects.filter(service_id=service.id)
-
-
-    return render(request, '_detailservices.html', {'service': service, 'service_obj': service_obj,
-                                                    'session_prices': session_prices})
+        return render(request, '_detailservices.html', {'service': service, 'service_obj': service_obj,
+                                                        'session_prices': session_prices, 'form_up': form_up,
+                                                        'form_price': form_price})
 
 
 def price(request):
-    return render(request, '_prices.html')
+    if request.method == 'POST':
+        form_up = forms.UpForm(request.POST)
+        form_price = forms.PricesForm(request.POST)
+
+        if 'exampleModalCenter' in request.POST:
+            if form_up.is_valid():
+                data = form_up.cleaned_data
+                smth = models.Appointment(name=data['name'], phone=data['phone'], email=data['email'],
+                                          date=data['date'], service=data['service'])
+                smth.save()
+            return HttpResponseRedirect('/services')
+
+        if 'price_form' in request.POST:
+            if form_price.is_valid():
+                data = form_price.cleaned_data
+                smth = models.GetPrice(name=data['name'], phone=data['phone'],
+                                       email=data['email'])
+                smth.save()
+            return HttpResponseRedirect('/prices')
+
+    else:
+        form_up = forms.UpForm(request.POST)
+        form_price = forms.PricesForm(request.POST)
+        return render(request, '_prices.html', {'form_price': form_price, 'form_up': form_up})
 
 
 def promo(request):
-    return render(request, '_promo.html')
+    if request.method == 'POST':
+        form_up = forms.UpForm(request.POST)
+        form_price = forms.PricesForm(request.POST)
+
+        if 'exampleModalCenter' in request.POST:
+            if form_up.is_valid():
+                data = form_up.cleaned_data
+                smth = models.Appointment(name=data['name'], phone=data['phone'], email=data['email'],
+                                          date=data['date'], service=data['service'])
+                smth.save()
+            return HttpResponseRedirect('/promo')
+
+        if 'price_form' in request.POST:
+            if form_price.is_valid():
+                data = form_price.cleaned_data
+                smth = models.GetPrice(name=data['name'], phone=data['phone'],
+                                       email=data['email'])
+                smth.save()
+            return HttpResponseRedirect('/promo')
+
+    else:
+        form_up = forms.UpForm(request.POST)
+        form_price = forms.PricesForm(request.POST)
+        promo_list = models.Promo.objects.all().order_by('id')
+
+        return render(request, '_promo.html', {'promo_list': promo_list, 'form_price': form_price,
+                                               'form_up': form_up})
 
 
-def detail_promo(request):
-    return render(request, '_detailpromo.html')
+def detail_promo(request, id):
+    if request.method == 'POST':
+        form_up = forms.UpForm(request.POST)
+
+        if 'exampleModalCenter' in request.POST:
+            if form_up.is_valid():
+                data = form_up.cleaned_data
+                smth = models.Appointment(name=data['name'], phone=data['phone'], email=data['email'],
+                                          date=data['date'], service=data['service'])
+                smth.save()
+            return HttpResponseRedirect('/promo')
+
+    else:
+        form_up = forms.UpForm(request.POST)
+
+        promo = get_object_or_404(models.Promo, id=id)
+        promo_result_points = models.PromoResultPoints.objects.filter(post_result=id)
+        promo_prices = models.PromoPrices.objects.filter(service_id=id)
+
+        return render(request, '_detailpromo.html', {'promo': promo, 'promo_result_points': promo_result_points,
+                                                     'promo_prices': promo_prices, 'form_up': form_up})
+
 
 def stuff(request):
-    staff_list = models.Personals.objects.all()
+    if request.method == 'POST':
 
-    return render(request, '_staff.html', {'staff_list': staff_list})
+        form_price = forms.PricesForm(request.POST)
+        form_up = forms.UpForm(request.POST)
+
+        if 'exampleModalCenter' in request.POST:
+            if form_up.is_valid():
+                data = form_up.cleaned_data
+                smth = models.Appointment(name=data['name'], phone=data['phone'], email=data['email'],
+                                          date=data['date'], service=data['service'])
+                smth.save()
+            return HttpResponseRedirect('/stuff')
+
+        if 'price_form' in request.POST:
+            if form_price.is_valid():
+                data = form_price.cleaned_data
+                smth = models.GetPrice(name=data['name'], phone=data['phone'],
+                                       email=data['email'])
+                smth.save()
+            return HttpResponseRedirect('/stuff')
+
+    else:
+        form_price = forms.PricesForm(request.POST)
+        form_up = forms.UpForm(request.POST)
+        staff_list = models.Personals.objects.all()
+
+        return render(request, '_staff.html', {'staff_list': staff_list, 'form_price': form_price,
+                                               'form_up': form_up})
 
 
 def detail_staff(request, id):
@@ -83,33 +256,96 @@ def detail_staff(request, id):
     :param id:
     :return:
     """
-    staff = get_object_or_404(models.Personals, id=id)
+    if request.method == 'POST':
+        form_up = forms.UpForm(request.POST)
 
-    information_text = models.Informations.objects.get(staff=staff.full_name)
-    information_li = models.InfoDirections.objects.filter(info_id_id=information_text.id)
+        if 'exampleModalCenter' in request.POST:
+            if form_up.is_valid():
+                data = form_up.cleaned_data
+                smth = models.Appointment(name=data['name'], phone=data['phone'], email=data['email'],
+                                          date=data['date'], service=data['service'])
+                smth.save()
+            return HttpResponseRedirect('/stuff')
 
-    education_text = models.Educations.objects.get(staff=staff.full_name)
-    education_li = models.EducationItems.objects.filter(ed_id_id=education_text.id)
+    else:
+        form_up = forms.UpForm(request.POST)
 
-    direction = models.DirectionsStaff.objects.get(staff=staff.full_name)
-    direction_list = models.DirectionStaffItems.objects.filter(dir_id=direction.id)
+        staff = get_object_or_404(models.Personals, id=id)
 
-    subdirection_all = models.Subdirections.objects.all()
-    items_sub = models.ItemsSubDirection.objects.all()
+        information_text = models.Informations.objects.get(staff=staff.full_name)
+        information_li = models.InfoDirections.objects.filter(info_id_id=information_text.id)
 
-    return render(request, '_detailstaff.html', {
-        'staff': staff, 'information_text': information_text, 'information_li': information_li,
-        'education_li': education_li, 'direction_list': direction_list, 'subdirection_all': subdirection_all,
-        'items_sub': items_sub
-    }
-                  )
+        education_text = models.Educations.objects.get(staff=staff.full_name)
+        education_li = models.EducationItems.objects.filter(ed_id_id=education_text.id)
+
+        direction = models.DirectionsStaff.objects.get(staff=staff.full_name)
+        direction_list = models.DirectionStaffItems.objects.filter(dir_id=direction.id)
+
+        subdirection_all = models.Subdirections.objects.all()
+        items_sub = models.ItemsSubDirection.objects.all()
+
+        return render(request, '_detailstaff.html', {
+            'staff': staff, 'information_text': information_text, 'information_li': information_li,
+            'education_li': education_li, 'direction_list': direction_list, 'subdirection_all': subdirection_all,
+            'items_sub': items_sub, 'form_up':form_up
+        }
+                      )
 
 
 def qa(request):
-    return render(request, '_qa.html')
+    if request.method == 'POST':
+
+        form_price = forms.PricesForm(request.POST)
+        form_up = forms.UpForm(request.POST)
+
+        if 'exampleModalCenter' in request.POST:
+            if form_up.is_valid():
+                data = form_up.cleaned_data
+                smth = models.Appointment(name=data['name'], phone=data['phone'], email=data['email'],
+                                          date=data['date'], service=data['service'])
+                smth.save()
+            return HttpResponseRedirect('/qa-page')
+
+        if 'price_form' in request.POST:
+            if form_price.is_valid():
+                data = form_price.cleaned_data
+                smth = models.GetPrice(name=data['name'], phone=data['phone'],
+                                       email=data['email'])
+                smth.save()
+            return HttpResponseRedirect('/qa-page')
+
+    else:
+        form_price = forms.PricesForm(request.POST)
+        form_up = forms.UpForm(request.POST)
+        return render(request, '_qa.html', {'form_price': form_price, 'form_up': form_up})
 
 
 def contacts(request):
-    return render(request, '_contacts.html')
+    if request.method == 'POST':
+
+        form_price = forms.PricesForm(request.POST)
+        form_up = forms.UpForm(request.POST)
+
+        if 'exampleModalCenter' in request.POST:
+            if form_up.is_valid():
+                data = form_up.cleaned_data
+                smth = models.Appointment(name=data['name'], phone=data['phone'], email=data['email'],
+                                          date=data['date'], service=data['service'])
+                smth.save()
+            return HttpResponseRedirect('/qa-page')
+
+        if 'price_form' in request.POST:
+            if form_price.is_valid():
+                data = form_price.cleaned_data
+                smth = models.GetPrice(name=data['name'], phone=data['phone'],
+                                       email=data['email'])
+                smth.save()
+            return HttpResponseRedirect('/contacts')
+
+    else:
+        form_price = forms.PricesForm(request.POST)
+        form_up = forms.UpForm(request.POST)
+
+        return render(request, '_contacts.html', {'form_price': form_price, 'form_up':form_up})
 
 

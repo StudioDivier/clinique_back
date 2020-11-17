@@ -11,7 +11,7 @@
                         <li class="breadcrumb-item">
                             <a href="/">Главная</a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Услуги</li>
+                        <li class="breadcrumb-item active" aria-current="page">ПРАЙС-ЛИСТ</li>
                     </ol>
                 </nav>
             </div>
@@ -223,7 +223,7 @@
             </div>
         </div>
     </div>
-    <div class="callback-section">
+    <div class="callback-section" id="price_form">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 input-headers">
@@ -231,8 +231,14 @@
                     <span>Индивидуально расскажем</span> <span>про каждую услугу</span>
                 </div>
                 <div class="col-lg-12 inputs-wrapper">
-                    <form action="" style="justify-content: center;">
-                        <button class="cta-button">Связаться с нами</button>
+                    <form method="post" action="" style="justify-content: center;">
+                        {% csrf_token %}
+                        {{ form_price.name }}
+                        {{ form_price.phone }}
+                        {{ form_price.email }}
+
+                        <button class="cta-button" type="submit" value="Submit" name="price_form">Записаться</button>
+
                     </form>
                     <p style="width: 31%; margin: 0 auto">Я соглашаюсь на обработку персональных данных и с <a href=""
                                                                                                                style="color: #4f9c50;">политикой

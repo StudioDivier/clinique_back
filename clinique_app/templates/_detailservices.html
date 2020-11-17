@@ -9,8 +9,15 @@
                 <div class="col">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-transparent p-0">
-                            <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Услуги</li>
+                            <li class="breadcrumb-item">
+                                <a href="/">Главная</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/services">Услуги</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                {{ service.name}}
+                            </li>
                         </ol>
                     </nav>
                 </div>
@@ -18,7 +25,7 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 headers-wrapper"><span class="section-subHeader">Тело</span></div>
+                <div class="col-lg-12 headers-wrapper"><span class="section-subHeader">{{ service.name}}</span></div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -61,7 +68,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button class="cta-button">Записаться на консультацию</button>
+                            <button class="cta-button" data-toggle="modal" data-target="#exampleModalCenter">Записаться на консультацию</button>
                         </div>
                         <div class="inner-wrapper-two">
                             <img class="main-image" src="{% static 'img/illustration-detail-services.png' %}" alt="Illustration">
@@ -71,19 +78,24 @@
             </div>
         </div>
     </div>
-    <div class="callback-section">
+    <div class="callback-section" id="price_form">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 input-headers">
                     <span>ЦЕНЫ НА ПРИЁМ ВРАЧА-ДЕРМАТОЛОГА, КОСМЕТОЛОГА, ЭНДОКРИНОЛОГА, ТРИХОЛОГА</span>
-                    <span>Индивидуально расскажем</span> <span>про каждую услугу</span>
+                    <span>Индивидуально расскажем</span>
+                    <span>про каждую услугу</span>
                 </div>
                 <div class="col-lg-12 inputs-wrapper">
-                    <form action="" style="justify-content: center;">
-                        <button class="cta-button">Связаться с нами</button>
+                    <form method="post" action="" style="justify-content: center;">
+                        {% csrf_token %}
+                        {{ form_price.name }}
+                        {{ form_price.phone }}
+                        {{ form_price.email }}
+
+                        <button class="cta-button" type="submit" value="Submit" name="price_form">Записаться</button>
                     </form>
-                    <p style="width: 31%; margin: 0 auto">Я соглашаюсь на обработку персональных данных и с <a href=""
-                                                                                                               style="color: #4f9c50;">политикой
+                    <p style="width: 31%; margin: 0 auto">Я соглашаюсь на обработку персональных данных и с <a href="" style="color: #4f9c50;">политикой
                         конфиденциальности</a></p>
                 </div>
             </div>

@@ -71,15 +71,17 @@
 <div class="slider-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 headerCol"><span class="header">Beauty Gene</span> <span>Я хочу...</span></div>
+            <div class="col-lg-12 headerCol">
+                <span class="header">Beauty Gene</span> <span>Я хочу...</span>
+            </div>
         </div>
         <div class="row sliderDiv">
-            <div class="single-piece"><img src="{% static 'img/skin.png' %}" alt="Skin"> <span>Кожа</span></div>
-            <div class="single-piece"><img src="{% static 'img/face.png' %}" alt="Skin"> <span>Лицо</span></div>
-            <div class="single-piece"><img src="{% static 'img/hair.png' %}" alt="Skin"> <span>Волосы</span></div>
-            <div class="single-piece"><img src="{% static 'img/legs.png' %}" alt="Skin"> <span>Ноги</span></div>
-            <div class="single-piece"><img src="{% static 'img/stomach.png' %}" alt="Skin"> <span>Живот</span></div>
-            <div class="single-piece"><img src="{% static 'img/hair.png' %}" alt="Skin"> <span>Волосы</span></div>
+            {% for service_detail in service_detail_list %}
+            <div class="single-piece">
+                <img src="{{service_detail.short_img.url}}" alt="Skin">
+                <span>{{service_detail.name}}</span>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -151,9 +153,6 @@
                 <span>Индивидуально расскажем</span> <span>про каждую услугу</span></div>
             <div class="col-12 inputs-wrapper">
                 <form method="post" action="">
-<!--                    <input type="text" placeholder="ФИО*">-->
-<!--                    <input type="text" placeholder="Телефон*">-->
-<!--                    <input type="text" placeholder="Почта">-->
                     {% csrf_token %}
                     {{ form_price.name }}
                     {{ form_price.phone }}
@@ -170,26 +169,25 @@
 <div class="promo-section">
     <div class="container">
         <div class="row">
-            <div class="col-12 headers-wrapper"><span class="section-subHeader">Наши акции </span><span
-                    class="section-header">Выгодно</span></div>
+            <div class="col-12 headers-wrapper">
+                <span class="section-subHeader">Наши акции </span>
+                <span class="section-header">Выгодно</span>
+            </div>
             <div class="col-12 promo-slider">
-                <div class="inner-wrapper">
+                {% for promo in promo_list %}
+                <div class="inner-wrapper" >
                     <div class="text-wrapper">
                         <div>Акция</div>
-                        <div class="inner-text-wrapper"><span class="first-span">Скидка <span
-                                class="colored-span">10%</span> на процедуры</span> <span class="second-span"><span
-                                class="colored-span">инновационной</span> лазерной системы</span></div>
+                        <div class="inner-text-wrapper">
+                            <span class="first-span">Скидка <span class="colored-span">{{promo.preview_discount}}%</span> на процедуры</span>
+                            <span class="second-span">{{promo.preview_discount_obj}}</span>
+                        </div>
                     </div>
-                    <button class="cta-button">Подробнее об акции</button>
+                    <a href="{{promo.get_absolute_url}}">
+                        <button class="cta-button">Подробнее об акции</button>
+                    </a>
                 </div>
-                <div class="inner-wrapper">
-                    <div class="text-wrapper">
-                        <div>Акция</div>
-                        <span class="first-span">Скидка <span class="colored-span">10%</span> на процедуры</span> <span
-                            class="second-span"><span class="colored-span">инновационной</span> лазерной системы</span>
-                    </div>
-                    <button class="cta-button">Подробнее об акции</button>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -236,6 +234,7 @@
                     class="section-header">мы онлайн</span></div>
             <div class="col-12">
                 <div class="media-wrapper">
+
                     <div class="col-lg-3"><img src="{% static 'img/media-example.png' %}" alt="Media"></div>
                     <div class="col-lg-3"><img src="{% static 'img/media-example.png' %}" alt="Media"></div>
                     <div class="col-lg-3"><img src="{% static 'img/media-example.png' %}" alt="Media"></div>
@@ -244,13 +243,16 @@
                     <div class="col-lg-3"><img src="{% static 'img/media-example.png' %}" alt="Media"></div>
                     <div class="col-lg-3"><img src="{% static 'img/media-example.png' %}" alt="Media"></div>
                     <div class="col-lg-3"><img src="{% static 'img/media-example.png' %}" alt="Media"></div>
+
                 </div>
             </div>
             <div class="col-12">
-                <button class="cta-button"><img src="{% static 'img/svg-insta.png' %}" alt="Instagram icon">&nbsp;
-                    Подписаться на нас в
-                    Instagram
-                </button>
+                <a href="https://www.instagram.com/beautygene.clinic/">
+                    <button class="cta-button"><img src="{% static 'img/svg-insta.png' %}" alt="Instagram icon">&nbsp;
+                        Подписаться на нас в
+                        Instagram
+                    </button>
+                </a>
             </div>
         </div>
     </div>
@@ -259,39 +261,21 @@
 <div class="stuff-section">
     <div class="container">
         <div class="row">
-            <div class="col-12 headers-wrapper"><span class="section-subHeader">Наши специалисты </span><span
-                    class="section-header">команда</span></div>
+            <div class="col-12 headers-wrapper">
+                <span class="section-subHeader">Наши специалисты </span>
+                <span class="section-header">команда</span></div>
             <div class="col-12 stuff-slider">
+                {% for stuff in staff_list %}
                 <div class="single-employee">
-                    <div class="inner-wrapper"><img src="{% static 'img/employee.png' %}" alt="Employee">
-                        <div class="text-wrapper"><h5>Лапатина Наталья Геннадьевна</h5>
-                            <span>Врач-косметолог, к.м.н.</span></div>
+                    <div class="inner-wrapper">
+                        <img src="{{stuff.photo_index_slider.url}}" alt="Employee">
+                        <div class="text-wrapper">
+                            <h5>{{stuff.full_name}}</h5>
+                            <span>{{stuff.state}}</span>
+                        </div>
                     </div>
                 </div>
-                <div class="single-employee">
-                    <div class="inner-wrapper"><img src="{% static 'img/employee.png' %}" alt="Employee">
-                        <div class="text-wrapper"><h5>Лапатина Наталья Геннадьевна</h5>
-                            <span>Врач-косметолог, к.м.н.</span></div>
-                    </div>
-                </div>
-                <div class="single-employee">
-                    <div class="inner-wrapper"><img src="{% static 'img/employee.png' %}" alt="Employee">
-                        <div class="text-wrapper"><h5>Лапатина Наталья Геннадьевна</h5>
-                            <span>Врач-косметолог, к.м.н.</span></div>
-                    </div>
-                </div>
-                <div class="single-employee">
-                    <div class="inner-wrapper"><img src="{% static 'img/employee.png' %}" alt="Employee">
-                        <div class="text-wrapper"><h5>Лапатина Наталья Геннадьевна</h5>
-                            <span>Врач-косметолог, к.м.н.</span></div>
-                    </div>
-                </div>
-                <div class="single-employee">
-                    <div class="inner-wrapper"><img src="{% static 'img/employee.png' %}" alt="Employee">
-                        <div class="text-wrapper"><h5>Лапатина Наталья Геннадьевна</h5>
-                            <span>Врач-косметолог, к.м.н.</span></div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
@@ -425,34 +409,5 @@
     </div>
 </div>
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="modal-body">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 inputs-wrapper"><h2>Записаться на прием</h2>
-                            <form method="post" action="#">
-                                {% csrf_token %}
-                                {{ form_up.name }}
-                                {{ form_up.phone }}
-                                {{ form_up.email }}
-                                {{ form_up.date }}
-                                {{ form_up.service }}
-                                <button class="cta-button" type="submit" value="Submit">Записаться</button>
-                            </form>
-                            <p>Я соглашаюсь на обработку персональных данных и с <a href="" style="color: #4f9c50;">политикой
-                                конфиденциальности</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 {% endblock %}

@@ -32,6 +32,7 @@ class DirectionsStaffAdmin(admin.ModelAdmin):
     inlines = [DirectionStaffItemsInline, ]
 
 
+
 class SubDirectionStaffItemsInline(admin.StackedInline):
     model = models.SubDirectionStaffItems
 
@@ -40,6 +41,7 @@ class SubDirectionStaffItemsInline(admin.StackedInline):
 class SubdirectionsAdmin(admin.ModelAdmin):
     list_display = ('staff', )
     inlines = [SubDirectionStaffItemsInline, ]
+
 
 
 @admin.register(models.Direction)
@@ -83,10 +85,35 @@ class SessionInline(admin.StackedInline):
 
 @admin.register(models.ServiceDetail)
 class ServiceDetailAdmin(admin.ModelAdmin):
-    list_display = ('name','description','time_operation','sex','reabilitation','time_result','amnesia',)
+    list_display = ('name', 'short_img', 'description','time_operation','sex','reabilitation','time_result','amnesia',)
     inlines = [ SessionInline ]
 
 
 @admin.register(models.ServicesList)
 class ServiceListAdmin(admin.ModelAdmin):
     list_display = ('service', 'img',)
+
+
+class PromoPricesInline(admin.StackedInline):
+    model = models.PromoPrices
+
+
+class PromoResultPointsInline(admin.StackedInline):
+    model = models.PromoResultPoints
+
+
+@admin.register(models.Promo)
+class PromoAdmin(admin.ModelAdmin):
+    list_display = ('preview_discount', 'preview_discount_obj', 'preview_date', 'preview_title', 'preview_description', 'post_title',
+                    'post_text', 'post_result_uptext', 'post_result_downtext', 'post_effect', )
+    inlines = [PromoResultPointsInline, PromoPricesInline, ]
+
+
+@admin.register(models.Appointment)
+class AppointmentAdmin(admin.ModelAdmin):
+    list_display = ('name', 'phone', 'email', 'date', 'service', )
+
+
+@admin.register(models.GetPrice)
+class GEtPriceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'phone', 'email', )

@@ -2,18 +2,18 @@ from .. import models
 
 
 def upformForward(**kwargs):
-    try:
-        data = models.Appointment(kwargs)
-        data.save()
-        return True
-    except Exception:
-        return False
+
+    data = models.Appointment(kwargs)
+    data.save()
+    return True
+
 
 
 def priceformForward(**kwargs):
-    try:
-        data = models.GetPrice(kwargs)
-        data.save()
-        return True
-    except Exception:
-        return False
+
+    print('DATA IN FUNC')
+    data = models.GetPrice(kwargs)
+    print('DATA IN MODEL')
+    data.save()
+    print('DATA IS SAVED')
+    return True

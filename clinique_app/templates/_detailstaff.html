@@ -8,8 +8,13 @@
             <div class="col">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb bg-transparent p-0">
-                        <li class="breadcrumb-item"><a href="/">Главная</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Услуги</li>
+                        <li class="breadcrumb-item">
+                            <a href="/">Главная</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="/stuff">Команда</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ staff.full_name }}</li>
                     </ol>
                 </nav>
             </div>
@@ -27,7 +32,7 @@
                     <div class="bio-text"><h2>{{ staff.full_name }}</h2><span
                             class="profession">{{ staff.state }}</span>
                         <span class="years-of-service"><strong>Стаж работы:</strong> {{ staff.experience }}</span>
-                        <button class="cta-button">Записаться на прием</button>
+                        <button class="cta-button" data-toggle="modal" data-target="#exampleModalCenter">Записаться на прием</button>
                         <p>
                             {{ staff.about_text|safe }}
                         </p>
