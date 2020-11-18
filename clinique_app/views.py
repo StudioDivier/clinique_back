@@ -45,7 +45,7 @@ def index(request):
         try:
             get_token = models.TokenInst.objects.filter().last()
             token = get_token.token
-        except models.TokenInst.DoesNotExist:
+        except:
             token = 'IGQVJVcjNxVlZACc2hpaG5FcGxvdW0xbER2UWZAxN2x6azhjdUczRFRfcVRzRmRsQzBzaU83WlRHcUdwZATRZAVVFmaW5kdk5vcnIzWEFBUXJCZAFdLNGNwWWNxN255SkNUajBFX2xXQTRyWHRfZAFFpUGtNUgZDZD'
 
         link_token = 'https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token={}'.format(token)
