@@ -175,11 +175,12 @@
             </div>
             <div class="col-12 promo-slider">
                 {% for promo in promo_list %}
-                <div class="inner-wrapper" >
+                <div class="inner-wrapper">
                     <div class="text-wrapper">
                         <div>Акция</div>
                         <div class="inner-text-wrapper">
-                            <span class="first-span">Скидка <span class="colored-span">{{promo.preview_discount}}%</span> на процедуры</span>
+                            <span class="first-span">Скидка <span
+                                    class="colored-span">{{promo.preview_discount}}%</span> на процедуры</span>
                             <span class="second-span">{{promo.preview_discount_obj}}</span>
                         </div>
                     </div>
@@ -234,16 +235,13 @@
                     class="section-header">мы онлайн</span></div>
             <div class="col-12">
                 <div class="media-wrapper">
-
-                    <div class="col-lg-3"><img src="{% static 'img/media-example.png' %}" alt="Media"></div>
-                    <div class="col-lg-3"><img src="{% static 'img/media-example.png' %}" alt="Media"></div>
-                    <div class="col-lg-3"><img src="{% static 'img/media-example.png' %}" alt="Media"></div>
-                    <div class="col-lg-3"><img src="{% static 'img/media-example.png' %}" alt="Media"></div>
-                    <div class="col-lg-3"><img src="{% static 'img/media-example.png' %}" alt="Media"></div>
-                    <div class="col-lg-3"><img src="{% static 'img/media-example.png' %}" alt="Media"></div>
-                    <div class="col-lg-3"><img src="{% static 'img/media-example.png' %}" alt="Media"></div>
-                    <div class="col-lg-3"><img src="{% static 'img/media-example.png' %}" alt="Media"></div>
-
+                    {% for insta in insta_media %}
+                    <div class="col-lg-3">
+                        <a href="{{insta.permalink}}" target="_blank">
+                            <img src="{{ insta.media_url}}" alt="Media">
+                        </a>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
             <div class="col-12">

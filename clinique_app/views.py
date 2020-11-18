@@ -1,9 +1,17 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponse
+
+from django.template import RequestContext
 from . import models
 from . import forms
 from .services import database_form
+import requests
+import json
+
+
+def handler404(request, exception):
+    return render(request, '404.html', status=404)
 
 
 def index(request):
@@ -35,9 +43,23 @@ def index(request):
         staff_list = models.Personals.objects.all().order_by('id')
         service_detail_list = models.ServiceDetail.objects.all().order_by('id')
 
+        get_token = models.TokenInst.objects.filter().last()
+        token = get_token.token
+
+        link_token = 'https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token={}'.format(token)
+        response = requests.get(link_token).json()
+        access_token = response['access_token']
+
+        if token != access_token:
+            models.TokenInst.objects.filter(token=token).update(token=access_token)
+
+        link_data = 'https://graph.instagram.com/me/media?fields=media_url,permalink&access_token={}'.format(access_token)
+        insta_data = requests.get(link_data).json()
+        insta_media = insta_data['data'][:8]
+
         return render(request, '_index.html', {'form_up': form_up, 'form_price': form_price,
                                                'promo_list': promo_list, 'staff_list': staff_list,
-                                               'service_detail_list': service_detail_list})
+                                               'service_detail_list': service_detail_list, 'insta_media': insta_media})
 
 
 def about(request):
@@ -218,7 +240,7 @@ def detail_promo(request, id):
                                                      'promo_prices': promo_prices, 'form_up': form_up})
 
 
-def stuff(request):
+def staff(request):
     if request.method == 'POST':
 
         form_price = forms.PricesForm(request.POST)
@@ -230,7 +252,7 @@ def stuff(request):
                 smth = models.Appointment(name=data['name'], phone=data['phone'], email=data['email'],
                                           date=data['date'], service=data['service'])
                 smth.save()
-            return HttpResponseRedirect('/stuff')
+            return HttpResponseRedirect('/staff')
 
         if 'price_form' in request.POST:
             if form_price.is_valid():
@@ -238,7 +260,7 @@ def stuff(request):
                 smth = models.GetPrice(name=data['name'], phone=data['phone'],
                                        email=data['email'])
                 smth.save()
-            return HttpResponseRedirect('/stuff')
+            return HttpResponseRedirect('/staff')
 
     else:
         form_price = forms.PricesForm(request.POST)
@@ -265,7 +287,7 @@ def detail_staff(request, id):
                 smth = models.Appointment(name=data['name'], phone=data['phone'], email=data['email'],
                                           date=data['date'], service=data['service'])
                 smth.save()
-            return HttpResponseRedirect('/stuff')
+            return HttpResponseRedirect('/staff')
 
     else:
         form_up = forms.UpForm(request.POST)

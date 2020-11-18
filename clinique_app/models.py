@@ -206,6 +206,9 @@ class PromoResultPoints(models.Model):
     post_result = models.ForeignKey(Promo, on_delete=models.CASCADE)
 
 
+class TokenInst(models.Model):
+    token = models.CharField(name='token', max_length=1024)
+
 
 
 
