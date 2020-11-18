@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'wk_l^9)sndvffhp!$xcffix^p^7ccydj*(3+!duq!1$y@z!0i2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['beauty-gene.herokuapp.com', '127.0.0.1']
 
