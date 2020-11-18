@@ -94,6 +94,15 @@ class ServiceListAdmin(admin.ModelAdmin):
     list_display = ('service', 'img',)
 
 
+class ItemSubdirectionInline(admin.StackedInline):
+    model = models.ItemsSubDirection
+
+
+@admin.register(models.Subdirections)
+class SubdirectionsAdmin(admin.ModelAdmin):
+    list_display = ('name_direction', 'name_subdirection')
+    inlines = [ ItemSubdirectionInline, ]
+
 class PromoPricesInline(admin.StackedInline):
     model = models.PromoPrices
 
