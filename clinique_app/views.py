@@ -42,9 +42,11 @@ def index(request):
         promo_list = models.Promo.objects.all().order_by('id')
         staff_list = models.Personals.objects.all().order_by('id')
         service_detail_list = models.ServiceDetail.objects.all().order_by('id')
-
-        get_token = models.TokenInst.objects.filter().last()
-        token = get_token.token
+        try:
+            get_token = models.TokenInst.objects.filter().last()
+            token = get_token.token
+        except models.TokenInst.DoesNotExist:
+            token = 'IGQVJVcjNxVlZACc2hpaG5FcGxvdW0xbER2UWZAxN2x6azhjdUczRFRfcVRzRmRsQzBzaU83WlRHcUdwZATRZAVVFmaW5kdk5vcnIzWEFBUXJCZAFdLNGNwWWNxN255SkNUajBFX2xXQTRyWHRfZAFFpUGtNUgZDZD'
 
         link_token = 'https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token={}'.format(token)
         response = requests.get(link_token).json()
