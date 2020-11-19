@@ -26,199 +26,24 @@
             </div>
             <div class="row">
                 <div class="col-12 content-wrapper">
-                    <div class="inner-wrapper">
-                        <h3>Лазерная эпиляция</h3>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Лазерная эпиляция лица</p>
-                            </div>
-                            <span class="price-block-blue">от 9 000 р.</span>
+                    {% for obj in service_obj %}
+                        <div class="inner-wrapper">
+                            <h3>{{ obj.service }}</h3>
+                            {% for item in service_items %}
+                                {% for price in session_prices %}
+                                    {% if item.service_id == price.service_id %}
+                                    <div class="price-wrapper">
+                                        <div class="text-wrapper">
+                                            <p class="colored-span">{{ price.part_name }}</p>
+                                        </div>
+                                        <span class="price-block-blue">от {{ price.session_price1 }} р.</span>
+                                    </div>
+                                    <hr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
                         </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Лазерная эпиляция тела</p>
-                            </div>
-                            <span class="price-block-green">от 11 000 р.</span>
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="inner-wrapper">
-                        <h3>Инъекции и пилинги</h3>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Ботокс</p>
-                            </div>
-                            <span class="price-block-blue">от 7 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Контурная пластика</p>
-                            </div>
-                            <span class="price-block-green">от 6 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">PRP терапия</p>
-                            </div>
-                            <span class="price-block-blue">от 9 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Биоревитализация</p>
-                            </div>
-                            <span class="price-block-green">от 8 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Липолитики</p>
-                            </div>
-                            <span class="price-block-blue">от 12 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Profhilo</p>
-                            </div>
-                            <span class="price-block-green">от 9 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Мезотерапия</p>
-                            </div>
-                            <span class="price-block-blue">от 7 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Пилинги</p>
-                            </div>
-                            <span class="price-block-green">от 5 000 р.</span>
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="inner-wrapper">
-                        <h3>Лазерная косметология</h3>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Лазерная шлифовка</p>
-                            </div>
-                            <span class="price-block-blue">от 8 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Удаление новообразований</p>
-                            </div>
-                            <span class="price-block-green">от 7 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Удаление шрамов и растяжек</p>
-                            </div>
-                            <span class="price-block-green">от 9 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Лазерное интимное омоложение</p>
-                            </div>
-                            <span class="price-block-green">от 10 000 р.</span>
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="inner-wrapper">
-                        <h3>Уход за лицом</h3>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Микротоковый лифтинг лица</p>
-                            </div>
-                            <span class="price-block-blue">от 8 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Аппаратный Anti-aging уход</p>
-                            </div>
-                            <span class="price-block-green">от 7 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Аппаратный уход для восстановления кожи</p>
-                            </div>
-                            <span class="price-block-green">от 9 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Anti-aging и восстанавливающие процедуры</p>
-                            </div>
-                            <span class="price-block-green">от 9 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Чистка лица</p>
-                            </div>
-                            <span class="price-block-green">от 11 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Гидродермабразия (Hydrafacial)</p>
-                            </div>
-                            <span class="price-block-green">от 9 000 р.</span>
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="inner-wrapper">
-                        <h3>Трихология</h3>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">PRP терапия</p>
-                            </div>
-                            <span class="price-block-blue">от 8 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Мезотерапия</p>
-                            </div>
-                            <span class="price-block-green">от 7 000 р.</span>
-                        </div>
-                        <hr>
-                    </div>
-                    <div class="inner-wrapper">
-                        <h3>Массаж</h3>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Классический</p>
-                            </div>
-                            <span class="price-block-blue">от 6 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Спортивный</p>
-                            </div>
-                            <span class="price-block-green">от 5 000 р.</span>
-                        </div>
-                        <hr>
-                        <div class="price-wrapper">
-                            <div class="text-wrapper">
-                                <p class="colored-span">Восстанавливающий/расслабляющий</p>
-                            </div>
-                            <span class="price-block-green">от 7 000 р.</span>
-                        </div>
-                        <hr>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -231,15 +56,21 @@
                     <span>Индивидуально расскажем</span> <span>про каждую услугу</span>
                 </div>
                 <div class="col-lg-12 inputs-wrapper">
-                    <form method="post" action="" style="justify-content: center;">
-                        {% csrf_token %}
-                        {{ form_price.name }}
-                        {{ form_price.phone }}
-                        {{ form_price.email }}
-
-                        <button class="cta-button" type="submit" value="Submit" name="price_form">Записаться</button>
-
-                    </form>
+                <form method="post" action="">
+                        <div class="row">
+                            {% csrf_token %}
+                            <div class="col-lg-4">{{ form_price.name }}</div>
+                            <div class="col-lg-4">{{ form_price.phone }}</div>
+                            <div class="col-lg-4">{{ form_price.email }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+                                <button class="cta-button" type="submit" value="Submit" name="price_form">Записаться</button>
+                            </div>
+                            <div class="col-lg-4"></div>
+                        </div>
+                </form>
                     <p style="width: 31%; margin: 0 auto">Я соглашаюсь на обработку персональных данных и с <a href=""
                                                                                                                style="color: #4f9c50;">политикой
                         конфиденциальности</a></p></div>

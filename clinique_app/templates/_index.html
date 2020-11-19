@@ -99,46 +99,16 @@
                         <div class="col-12 section-wrapper">
                             <div class="another-wrapper">
                                 <div class="price-row">
+                                    {% for item in price_list_obj %}
                                     <div class="price-wrapper">
-                                        <div class="text-wrapper"><p class="colored-span">Увеличение губ</p>
-                                            <p>Широкий выбор препаратов в инъекционной косметологии, направленных на
-                                                решение многих проблем. Мезококтейли, филеры, рассасывающие нити
-                                                позволяют специалисту косметологу эффективно решать множество задач от
-                                                коррекции возрастных изменений и исправлений недостатков в виде формы
-                                                губ, носа, скул до борьбы с пигментными пятнами</p></div>
-                                        <span class="price-block-blue">9 000 р.</span>
+                                        <div class="text-wrapper">
+                                            <p class="colored-span">{{item.name_cat}}</p>
+                                            <p>{{item.description}}</p>
+                                        </div>
+                                        <span class="price-block-blue">{{item.price}} р.</span>
                                     </div>
                                     <hr>
-                                    <div class="price-wrapper">
-                                        <div class="text-wrapper"><p class="colored-span">Биоревитализация</p>
-                                            <p>Биоревитализация – инъекционная процедура, которая проводится препаратами
-                                                на основе гиалуроновой кислоты. Это тот важнейший компонент нашего
-                                                организма, который отвечает за тонус кожи, уровень ее увлажненности,
-                                                эластичность и упругость. Гиалуроновая кислота синтезируется
-                                                фибробластами естественным путем, но со временем ее синтез
-                                                снижается.</p></div>
-                                        <span class="price-block-green">12 000 р.</span>
-                                    </div>
-                                    <hr>
-                                    <div class="price-wrapper">
-                                        <div class="text-wrapper"><p class="colored-span">Плазмолифтинг</p>
-                                            <p>Плазмолифтинг — это инъекционная процедура, при проведении которой
-                                                врач-дерматокосметолог вводит в кожу микродозы собственной плазмы
-                                                пациента. Многие наверняка увидели здесь связь с мезотерапией. И правда:
-                                                в обоих случаях в кожу вводятся микроинъекции. Однако для мезотерапии
-                                                используются специально подобранные врачом</p></div>
-                                        <span class="price-block-blue">9 000 р.</span>
-                                    </div>
-                                    <hr>
-                                    <div class="price-wrapper">
-                                        <div class="text-wrapper"><p class="colored-span">Плазмолифтинг</p>
-                                            <p>Плазмолифтинг — это инъекционная процедура, при проведении которой
-                                                врач-дерматокосметолог вводит в кожу микродозы собственной плазмы
-                                                пациента. Многие наверняка увидели здесь связь с мезотерапией. И правда:
-                                                в обоих случаях в кожу вводятся микроинъекции. Однако для мезотерапии
-                                                используются специально подобранные врачом</p></div>
-                                        <span class="price-block-blue">9 000 р.</span>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -153,12 +123,19 @@
                 <span>Индивидуально расскажем</span> <span>про каждую услугу</span></div>
             <div class="col-12 inputs-wrapper">
                 <form method="post" action="">
-                    {% csrf_token %}
-                    {{ form_price.name }}
-                    {{ form_price.phone }}
-                    {{ form_price.email }}
-
-                    <button class="cta-button" type="submit" value="Submit" name="price_form">Записаться</button>
+                        <div class="row">
+                            {% csrf_token %}
+                            <div class="col-lg-4">{{ form_price.name }}</div>
+                            <div class="col-lg-4">{{ form_price.phone }}</div>
+                            <div class="col-lg-4">{{ form_price.email }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+                                <button class="cta-button" type="submit" value="Submit" name="price_form">Записаться</button>
+                            </div>
+                            <div class="col-lg-4"></div>
+                        </div>
                 </form>
                 <p>Я соглашаюсь на обработку персональных данных и с <a href="" style="color: #4f9c50;">политикой
                     конфиденциальности</a></p></div>

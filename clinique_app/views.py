@@ -14,6 +14,10 @@ def handler404(request, exception):
     return render(request, '404.html', status=404)
 
 
+def privacy(request):
+    return render(request, 'politic.html')
+
+
 def index(request):
     if request.method == 'POST':
 
@@ -42,6 +46,10 @@ def index(request):
         promo_list = models.Promo.objects.all().order_by('id')
         staff_list = models.Personals.objects.all().order_by('id')
         service_detail_list = models.ServiceDetail.objects.all().order_by('id')
+
+        popular_price_list = models.Popular.objects.all()
+        price_list_obj = popular_price_list[:4]
+
         try:
             get_token = models.TokenInst.objects.filter().last()
             token = get_token.token
@@ -61,7 +69,8 @@ def index(request):
 
         return render(request, '_index.html', {'form_up': form_up, 'form_price': form_price,
                                                'promo_list': promo_list, 'staff_list': staff_list,
-                                               'service_detail_list': service_detail_list, 'insta_media': insta_media})
+                                               'service_detail_list': service_detail_list, 'insta_media': insta_media,
+                                               'price_list_obj': price_list_obj})
 
 
 def about(request):
@@ -186,7 +195,14 @@ def price(request):
     else:
         form_up = forms.UpForm(request.POST)
         form_price = forms.PricesForm(request.POST)
-        return render(request, '_prices.html', {'form_price': form_price, 'form_up': form_up})
+
+        service_obj = models.ServicesList.objects.all()
+        service_items = models.ServiceDetail.objects.all()
+        session_prices = models.SessionPrices.objects.all()
+
+        return render(request, '_prices.html', {'form_price': form_price, 'form_up': form_up,
+                                                'service_obj': service_obj, 'service_items': service_items,
+                                                'session_prices':session_prices})
 
 
 def promo(request):

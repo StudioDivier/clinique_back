@@ -126,3 +126,8 @@ class AppointmentAdmin(admin.ModelAdmin):
 @admin.register(models.GetPrice)
 class GEtPriceAdmin(admin.ModelAdmin):
     list_display = ('name', 'phone', 'email', )
+
+
+@admin.register(models.Popular)
+class PopularAdmin(admin.ModelAdmin):
+    list_display = ('name_cat', 'description', 'price')

@@ -27,6 +27,9 @@ class EducationItems(models.Model):
     ed_id = models.ForeignKey(Educations, on_delete=models.CASCADE)
     item = models.CharField(name='item', max_length=256)
 
+    def __str__(self):
+        return self.item
+
 
 class Courses(models.Model):
     staff = models.CharField(name='staff', max_length=128)
@@ -39,6 +42,9 @@ class CoursesItems(models.Model):
     courses_id = models.ForeignKey(Courses, on_delete=models.CASCADE)
     item = models.CharField(name='item', max_length=256)
 
+    def __str__(self):
+        return self.item
+
 
 class Events(models.Model):
     staff = models.CharField(name='staff', max_length=128)
@@ -50,6 +56,9 @@ class Events(models.Model):
 class EventsItems(models.Model):
     events_id = models.ForeignKey(Events, on_delete=models.CASCADE)
     item = models.CharField(name='item', max_length=256)
+
+    def __str__(self):
+        return self.item
 
 
 #in use
@@ -128,9 +137,11 @@ class Personals(models.Model):
     add_subdirection = models.ForeignKey(SubDirectionsStaff, on_delete=models.CASCADE)
     # add_subdirection = models.ForeignKey(Subdirections, on_delete=models.CASCADE)
 
-
     def get_absolute_url(self):
         return reverse('index:detail_staff', args=[self.id])
+
+    def __str__(self):
+        return self.full_name
 
 
 class Appointment(models.Model):
@@ -151,6 +162,9 @@ class ServicesList(models.Model):
     service = models.CharField(name='service', max_length=128)
     img = models.ImageField(name='img')
 
+    def __str__(self):
+        return self.service
+
 
 class ServiceDetail(models.Model):
     service = models.ForeignKey(ServicesList, on_delete=models.CASCADE)
@@ -164,9 +178,11 @@ class ServiceDetail(models.Model):
     time_result = models.CharField(name='time_result', max_length=128)
     amnesia = models.CharField(name='amnesia', max_length=128)
 
-
     def get_absolute_url(self):
         return reverse('index:detail_services', args=[self.id])
+
+    def __str__(self):
+        return self.name
 
 
 class SessionPrices(models.Model):
@@ -174,6 +190,9 @@ class SessionPrices(models.Model):
     session_price1 = models.DecimalField(name='session_price1', max_digits=9, decimal_places=2)
     session_price2 = models.DecimalField(name='session_price2', max_digits=9, decimal_places=2)
     service = models.ForeignKey(ServiceDetail, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.part_name
 
 
 class Promo(models.Model):
@@ -193,12 +212,18 @@ class Promo(models.Model):
     def get_absolute_url(self):
         return reverse('index:detail_promo', args=[self.id])
 
+    def __str__(self):
+        return self.preview_title
+
 
 class PromoPrices(models.Model):
     part_name = models.CharField(name='part_name', max_length=128)
     session_price1 = models.DecimalField(name='session_price1', max_digits=9, decimal_places=2)
     session_price2 = models.DecimalField(name='session_price2', max_digits=9, decimal_places=2)
     service = models.ForeignKey(Promo, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.part_name
 
 
 class PromoResultPoints(models.Model):
@@ -208,6 +233,15 @@ class PromoResultPoints(models.Model):
 
 class TokenInst(models.Model):
     token = models.CharField(name='token', max_length=1024)
+
+
+class Popular(models.Model):
+    name_cat = models.CharField(name='name_cat', max_length=128)
+    description = models.TextField(name='description', max_length=2048)
+    price = models.DecimalField(name='price', max_digits=9, decimal_places=2)
+
+    def __str__(self):
+        return self.name_cat
 
 
 

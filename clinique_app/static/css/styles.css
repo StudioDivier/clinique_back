@@ -1,3 +1,7 @@
+input:focus {
+    outline: none
+}
+
 .about-page {
     background-image: url(../img/services-background.png);
     background-repeat: no-repeat;
@@ -1804,6 +1808,10 @@ footer .map-wrapper iframe {
     justify-content: space-between
 }
 
+.inputs-wrapper form .row {
+    width: 100%;
+}
+
 @media (max-width: 1200px) {
     .inputs-wrapper form {
         -webkit-box-pack: center;
@@ -1813,7 +1821,8 @@ footer .map-wrapper iframe {
 }
 
 .inputs-wrapper form .cta-button {
-    padding: 16px 85px
+    padding: 16px 115px;
+    margin-top: 40px;
 }
 
 .inputs-wrapper input {
@@ -3138,6 +3147,10 @@ footer .map-wrapper iframe {
 .modal-content {
     position: relative;
     border-radius: 25px
+}
+
+.modal-content form .row {
+    width: 100%;
 }
 
 .modal-content .modal-body {
