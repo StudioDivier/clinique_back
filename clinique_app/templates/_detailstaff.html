@@ -58,6 +58,14 @@
                     {% for ed_li in education_li %}
                     <p>{{ ed_li.item}}</p>
                     {% endfor %}
+                    <h3>Курсы повышения квалификации:</h3>
+                    {% for course in courses_li %}
+                    <p>{{ course.item}}</p>
+                    {% endfor %}
+                    <h3>Участие в мероприятиях:</h3>
+                    {% for event in events_li %}
+                    <p>{{event.item}}</p>
+                    {% endfor %}
                 </div>
                 {{ item }}
             </div>

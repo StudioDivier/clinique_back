@@ -179,7 +179,7 @@ class SessionPrices(models.Model):
 class Promo(models.Model):
     post_img = models.ImageField(name='post_img', upload_to='promo/post_img/')
     preview_img = models.ImageField(name='preview_img', upload_to='promo/preview_img/')
-    preview_discount = models.ImageField(name='preview_discount', upload_to='promo/preview_discount/')
+    preview_discount = models.CharField(name='preview_discount', max_length=128)
     preview_discount_obj = models.CharField(name='preview_discount_obj', max_length=128)
     preview_date = models.DateField(name='preview_date')
     preview_title = models.CharField(name='preview_title', max_length=128)

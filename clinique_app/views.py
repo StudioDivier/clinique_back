@@ -299,6 +299,12 @@ def detail_staff(request, id):
         information_text = models.Informations.objects.get(staff=staff.full_name)
         information_li = models.InfoDirections.objects.filter(info_id_id=information_text.id)
 
+        courses_text = models.Courses.objects.get(staff=staff.full_name)
+        courses_li = models.CoursesItems.objects.filter(courses_id_id=courses_text.id)
+
+        events_text = models.Events.objects.get(staff=staff.full_name)
+        events_li = models.EventsItems.objects.filter(events_id_id=events_text.id)
+
         education_text = models.Educations.objects.get(staff=staff.full_name)
         education_li = models.EducationItems.objects.filter(ed_id_id=education_text.id)
 
@@ -311,7 +317,7 @@ def detail_staff(request, id):
         return render(request, '_detailstaff.html', {
             'staff': staff, 'information_text': information_text, 'information_li': information_li,
             'education_li': education_li, 'direction_list': direction_list, 'subdirection_all': subdirection_all,
-            'items_sub': items_sub, 'form_up':form_up
+            'items_sub': items_sub, 'form_up':form_up, 'courses_li': courses_li, 'events_li': events_li
         }
                       )
 

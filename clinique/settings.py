@@ -27,8 +27,8 @@ SECRET_KEY = 'wk_l^9)sndvffhp!$xcffix^p^7ccydj*(3+!duq!1$y@z!0i2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['beauty-gene.herokuapp.com', '127.0.0.1']
-
+ALLOWED_HOSTS = ['beauty-gene.herokuapp.com', '127.0.0.1', ]
+# 'beauty-gene.herokuapp.com',
 
 # Application definition
 
@@ -89,6 +89,16 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'clinique',
+#         'USER': 'postgres',
+#         'PASSWORD': 'admin',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation

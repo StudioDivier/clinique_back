@@ -266,7 +266,9 @@
                 {% for stuff in staff_list %}
                 <div class="single-employee">
                     <div class="inner-wrapper">
-                        <img src="{{stuff.photo_index_slider.url}}" alt="Employee">
+                        <a href="{{stuff.get_absolute_url}}">
+                            <img src="{{stuff.photo_index_slider.url}}" alt="Employee">
+                        </a>
                         <div class="text-wrapper">
                             <h5>{{stuff.full_name}}</h5>
                             <span>{{stuff.state}}</span>
