@@ -78,7 +78,9 @@
         <div class="row sliderDiv">
             {% for service_detail in service_detail_list %}
             <div class="single-piece">
-                <img src="{{service_detail.short_img.url}}" alt="Skin">
+                <a href="{{service_detail.get_absolute_url}}">
+                    <img src="{{service_detail.short_img.url}}" alt="Skin">
+                </a>
                 <span>{{service_detail.name}}</span>
             </div>
             {% endfor %}
