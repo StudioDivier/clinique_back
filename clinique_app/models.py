@@ -116,8 +116,8 @@ class Personals(models.Model):
     full_name = models.CharField(name='full_name', max_length=128)
     state = models.CharField(name='state', max_length=128)
     experience = models.CharField(name='experience', max_length=64)
-    photo_index_slider = models.ImageField(name='photo_index_slider', upload_to='personal/slider/')
-    photo = models.ImageField(name='photo', upload_to='personal/')
+    photo_index_slider = models.ImageField(name='photo_index_slider')
+    photo = models.ImageField(name='photo')
     about_text = RichTextField()
 
     info = models.ForeignKey(Informations, on_delete=models.CASCADE)
@@ -149,13 +149,13 @@ class GetPrice(models.Model):
 
 class ServicesList(models.Model):
     service = models.CharField(name='service', max_length=128)
-    img = models.ImageField(name='img', upload_to='service/')
+    img = models.ImageField(name='img')
 
 
 class ServiceDetail(models.Model):
     service = models.ForeignKey(ServicesList, on_delete=models.CASCADE)
     name = models.CharField(name='name', max_length=128)
-    short_img = models.ImageField(name='short_img', upload_to='personal/detail/')
+    short_img = models.ImageField(name='short_img')
 
     description = models.CharField(name='description', max_length=1024)
     time_operation = models.CharField(name='time_operation', max_length=128)
@@ -177,8 +177,8 @@ class SessionPrices(models.Model):
 
 
 class Promo(models.Model):
-    post_img = models.ImageField(name='post_img', upload_to='promo/post_img/')
-    preview_img = models.ImageField(name='preview_img', upload_to='promo/preview_img/')
+    post_img = models.ImageField(name='post_img')
+    preview_img = models.ImageField(name='preview_img')
     preview_discount = models.CharField(name='preview_discount', max_length=128)
     preview_discount_obj = models.CharField(name='preview_discount_obj', max_length=128)
     preview_date = models.DateField(name='preview_date')
