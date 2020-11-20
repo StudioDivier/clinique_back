@@ -131,3 +131,8 @@ class GEtPriceAdmin(admin.ModelAdmin):
 @admin.register(models.Popular)
 class PopularAdmin(admin.ModelAdmin):
     list_display = ('name_cat', 'description', 'price')
+
+
+@admin.register(models.qa)
+class qaAdmin(admin.ModelAdmin):
+    list_display = ('num', 'question', 'answer', )

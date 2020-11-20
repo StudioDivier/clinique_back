@@ -50,6 +50,8 @@ def index(request):
         popular_price_list = models.Popular.objects.all()
         price_list_obj = popular_price_list[:4]
 
+        qas = models.qa.objects.all().order_by('num')
+
         try:
             get_token = models.TokenInst.objects.filter().last()
             token = get_token.token
@@ -70,7 +72,7 @@ def index(request):
         return render(request, '_index.html', {'form_up': form_up, 'form_price': form_price,
                                                'promo_list': promo_list, 'staff_list': staff_list,
                                                'service_detail_list': service_detail_list, 'insta_media': insta_media,
-                                               'price_list_obj': price_list_obj})
+                                               'price_list_obj': price_list_obj, 'qas':qas})
 
 
 def about(request):
@@ -363,7 +365,10 @@ def qa(request):
     else:
         form_price = forms.PricesForm(request.POST)
         form_up = forms.UpForm(request.POST)
-        return render(request, '_qa.html', {'form_price': form_price, 'form_up': form_up})
+
+        qas = models.qa.objects.all().order_by('num')
+
+        return render(request, '_qa.html', {'form_price': form_price, 'form_up': form_up, 'qas': qas})
 
 
 def contacts(request):

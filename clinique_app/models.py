@@ -244,5 +244,14 @@ class Popular(models.Model):
         return self.name_cat
 
 
+class qa(models.Model):
+    num = models.CharField(name='num', max_length=4)
+    question = models.CharField(name='question', max_length=128)
+    answer = models.TextField(name='answer', max_length=2048)
+
+    def __str__(self):
+        return str(self.id)
+
+
 
 
